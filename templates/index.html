@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .card { background: white; border-radius: 12px; padding: 2rem; width: 100%; max-width: 480px; border: 1px solid #e0e0e0; }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+    .sub { font-size: 13px; color: #888; margin-bottom: 1.5rem; }
+    input[type="text"] { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; margin-bottom: 10px; outline: none; }
+    input[type="text"]:focus { border-color: #4f46e5; }
+    button { width: 100%; padding: 10px; background: #4f46e5; color: white; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
+    button:hover { background: #4338ca; }
+    .result { margin-top: 1.2rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 14px; font-size: 13px; }
+    .result a { color: #16a34a; font-weight: 500; word-break: break-all; }
+    .error { margin-top: 1rem; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px 14px; font-size: 13px; color: #dc2626; }
+    .server { margin-top: 1.5rem; font-size: 11px; color: #bbb; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>URL Shortener</h1>
+    <p class="sub">Paste a long URL and get a short one instantly.</p>
+    <form method="POST">
+      <input type="text" name="url" placeholder="https://example.com/very/long/url" required />
+      <button type="submit">Shorten</button>
+    </form>
+    {% if short_url %}
+    <div class="result">
+      Short URL: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+    <p class="server">Served by: {{ host }}</p>
+  </div>
+</body>
+</html>
